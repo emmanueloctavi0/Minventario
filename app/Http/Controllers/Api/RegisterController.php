@@ -45,12 +45,11 @@ class RegisterController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation error', $validator->errors());
+            return $this->sendError('Los campos son obligatorios', $validator->errors());
         }
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'message' => 'Unauthorized'], 401);
+            return $this->sendError('Las credenciales no son correctas');
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
@@ -59,13 +58,13 @@ class RegisterController extends BaseController
             $token->expires_at = Carbon::now()->addWeeks(1);
         }
         $token->save();
-        return response()->json([
+        $data = [
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
-            'expires_at'   => Carbon::parse(
-                $tokenResult->token->expires_at)
-                    ->toDateTimeString(),
-        ]);
+            'expires_at'   => Carbon::parse($tokenResult->token->expires_at)
+                                ->toDateTimeString(),
+        ];
+        return $this->sendResponse($data, 'Login Successfully');
     }
 
     public function logout(Request $request)
