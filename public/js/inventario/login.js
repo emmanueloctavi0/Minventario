@@ -24,7 +24,7 @@ btnLogin.onclick = function () {
     .then(response => {
 
         if (response.success){
-
+            //Creamos cookie de JWT
             let d = new Date();
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
@@ -33,7 +33,6 @@ btnLogin.onclick = function () {
         } else {
             loginHelp.innerHTML = response.message;
         }
-
     })
     .catch(error => console.log(error));
 }

@@ -10,7 +10,7 @@ class PagesController extends Controller
     public function login()
     {
         $response = [
-            'success' => false,
+            'login' => false,
             'message' => 'Tienes que estar logeado',
         ];
 

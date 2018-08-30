@@ -12,5 +12,6 @@ class Article extends Model
         'image',
         'amount',
         'price',
+        'user_id',
     ];
 }

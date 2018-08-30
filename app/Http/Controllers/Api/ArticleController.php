@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Article;
+use Validator;
 
 class ArticleController extends BaseController
 {
@@ -25,10 +26,21 @@ class ArticleController extends BaseController
 
     /**
      * Show the form for creating a new resource.
-     * POST
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *  POST
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $input = $request->all();
 
@@ -43,20 +55,11 @@ class ArticleController extends BaseController
             return $this->sendError('Validation error', $validator->errors());
         }
 
+        $input['user_id'] = $request->user()->id;
+
         $article = Article::create($input);
 
         return $this->sendResponse($article, 'Article was created successfully');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
