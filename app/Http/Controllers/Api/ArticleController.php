@@ -18,13 +18,13 @@ class ArticleController extends BaseController
         $user_id = $request->user()->id;
         $articles = Article::where('user_id',$user_id)->orderBy('article_id','asc')->get();
 
+        $data['user_name'] = $request->user()->name;
+
         if (is_null($articles) || $articles->isEmpty()) {
-            return $this->sendError('There are not articles');
+            return $this->sendError('There are not articles',$data);
         }
-        $data = [
-            'products'  => $articles,
-            'user_name' => $request->user()->name,
-        ];
+        $data['products'] = $articles;
+
         return $this->sendResponse($data, 'Articles from database');
     }
 

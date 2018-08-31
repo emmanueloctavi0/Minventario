@@ -1,15 +1,25 @@
 @extends('layouts.app')
 
+@section('navbar')
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container">
+            <ul class="navbar-nav">
+                <li class="nav-item" > <a id="logout" class="nav-link" href="#">Salir</a> </li>
+            </ul>
+        </div>
+    </nav>
+@endsection
+
 @section('content')
-
-<h3 class="m-4">Inventario de NOMBRE</h3>
-
-<button class="btn btn-success mb-3" type="button" name="button">Descargar PDF</button>
-<button class="btn btn-success mb-3 ml-3" type="button" name="button">Descargar Excel</button>
-
-<button class="btn btn-danger mb-3 float-right" type="button" name="button">Subir Excel</button>
-
 <div id="articleTable">
+    <h3 class="m-4">Inventario de @{{userName}}</h3>
+
+    <button class="btn btn-success mb-3" type="button" name="button">Descargar PDF</button>
+    <button class="btn btn-success mb-3 ml-3" type="button" name="button">Descargar Excel</button>
+
+    <button class="btn btn-danger mb-3 float-right" type="button" name="button">Subir Excel</button>
+
+
     <table v-if="areProducts" class="table table-hover">
         <thead>
             <tr>
@@ -28,7 +38,7 @@
                 <td>@{{product.description}}</td>
                 <td>@{{product.amount}}</td>
                 <td>$@{{product.price}}</td>
-                <td>$precTl</td>
+                <td>$@{{product.price * product.amount}}</td>
             </tr>
         </tbody>
     </table>

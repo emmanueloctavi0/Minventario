@@ -11,7 +11,7 @@ const registerHelp = document.getElementById('registerHelp');
 btnCreate.onclick = function () {
     let url = window.location.origin+'/api/auth/signup';
     let data = {
-        name : emailRegister.value,
+        name : nameRegister.value,
         email : emailRegister.value,
         password : passwordRegister.value,
         password_confirmation : passwordRegisterC.value

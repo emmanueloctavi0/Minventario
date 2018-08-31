@@ -6,6 +6,7 @@ var articleTable = new Vue({
         urlApi: window.location.href+'api/article',
         success: false,
         areProducts: false,
+        userName: "",
         products: null,
         jwt : ""
     },
@@ -38,9 +39,9 @@ var articleTable = new Vue({
                 if (typeof response.login === 'undefined') {
                     //Significa que el logeo fue correcto
                     articleTable.areProducts = response.success;
-                    //mostrar los productos
+                    //mostrar los productos y el nombre del usuario
                     articleTable.products = response.data.products;
-                    console.log(response.data[0].name);
+                    articleTable.userName = response.data.user_name;
 
                 } else if (response.login == false) {
                     location.href = this.url+'ingresar';
@@ -53,7 +54,21 @@ var articleTable = new Vue({
     }
 });
 
-
+const logout = document.getElementById('logout');
+logout.onclick = function () {
+    fetch(window.location.origin + '/api/auth/logout',{
+        method: 'GET',
+        headers:{
+            'Authorization' : 'Bearer '+ articleTable.jwt,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(json => {
+        location.href = window.location.origin;
+    })
+    .catch(err => console.error(err))
+}
 
 function getCookie(cname) {
     var name = cname + "=";
