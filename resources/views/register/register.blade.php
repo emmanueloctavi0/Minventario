@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('navbar-items')
+    <li class="nav-item" > <a class="nav-link" href="/">Home</a> </li>
+    <li class="nav-item" > <a class="nav-link" href="/ingresar">Ingresar</a> </li>
+@endsection
+
 @section('content')
 {{--Registrarse  --}}
 <div class="row justify-content-center">

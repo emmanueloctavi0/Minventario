@@ -68,7 +68,8 @@ var articleTable = new Vue({
 
             })
             .catch(err => console.error(err));
-        }
+        },
+        
 
     }
 });

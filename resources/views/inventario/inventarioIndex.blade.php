@@ -4,19 +4,15 @@
     <link rel="stylesheet" href="{{url('css/inventario/table.css')}}">
 @endsection
 
-@section('navbar')
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <div class="container">
-            <ul class="navbar-nav">
-                <li class="nav-item" > <a id="logout" class="nav-link" href="#">Salir</a> </li>
-            </ul>
-        </div>
-    </nav>
+@section('navbar-items')
+    <li class="nav-item" > <a class="nav-link" href="/registrarse">Registrarse</a> </li>
+    <li class="nav-item" > <a class="nav-link" href="/ingresar">Ingresar</a> </li>
+    <li class="nav-item" > <a id="logout" class="nav-link" href="#">Salir</a> </li>
 @endsection
 
 @section('content')
 <div id="articleTable">
-    <h3 class="my-4">Inventario de @{{userName}}</h3>
+    <h2 class="my-4 text-center">Inventario de @{{userName}}</h2>
     <button type="button" class="btn btn-outline-secondary btn-sm mb-2">Agregar producto</button>
     <table v-if="areProducts" class="table table-hover">
         <thead>
@@ -45,14 +41,27 @@
     <div v-else class="card p-2 text-center">
         No hay productos en el inventario!!
     </div>
+    <div class="btnTable">
+        <button v-if="areProducts" class="btn btn-success my-2 mx-3">Descargar PDF</button>
+        <button v-if="areProducts" class="btn btn-success my-2 mx-3">Descargar Excel</button>
 
-    <button v-if="areProducts" class="btn btn-success my-2 float-left">Descargar PDF</button>
-    <button v-if="areProducts" class="btn btn-success my-2 ml-3 float-left">Descargar Excel</button>
+        <button class="btnExcel btn btn-danger my-2 mx-3">Subir Excel</button>
+    </div>
 
-    <button class="btn btn-danger my-2 float-right">Subir Excel</button>
-
+</div>
+<div class="border-top my-4"></div>
+<h2 class=" text-center" >Gráficas</h2>
+<select id="selectPie" class="mx-auto d-block custom-select w-25">
+  <option selected value="0">Productos (cantidad)</option>
+  <option value="1">Productos (precio unitario)</option>
+  <option value="2">Productos (precio total)</option>
+</select>
+<div id="chart_div">
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script type="text/javascript" src="{{url('js/inventario/table.js')}}"></script>
+{{--Graficas--}}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="{{url('js/inventario/pieChart.js')}}" ></script>
 @endsection

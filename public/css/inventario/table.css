@@ -5,3 +5,13 @@
 #productId:hover{
     text-decoration: underline;
 }
+
+.btnTable {
+    position: relative;
+    height: 35px;
+}
+
+.btnExcel {
+    position: absolute;
+    right: 0;
+}
