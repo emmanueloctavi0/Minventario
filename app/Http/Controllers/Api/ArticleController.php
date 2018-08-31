@@ -13,15 +13,19 @@ class ArticleController extends BaseController
      * GET
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::all();
+        $user_id = $request->user()->id;
+        $articles = Article::where('user_id',$user_id)->orderBy('article_id','asc')->get();
 
         if (is_null($articles) || $articles->isEmpty()) {
             return $this->sendError('There are not articles');
         }
-
-        return $this->sendResponse($articles, 'Articles from database');
+        $data = [
+            'products'  => $articles,
+            'user_name' => $request->user()->name,
+        ];
+        return $this->sendResponse($data, 'Articles from database');
     }
 
     /**

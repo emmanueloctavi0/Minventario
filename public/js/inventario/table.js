@@ -34,13 +34,12 @@ var articleTable = new Vue({
             .then(res => res.json())
             .then(response => {
                 //En caso de que se niege el acceso
-                console.log(response)
 
                 if (typeof response.login === 'undefined') {
                     //Significa que el logeo fue correcto
                     articleTable.areProducts = response.success;
                     //mostrar los productos
-                    articleTable.products = response.data;
+                    articleTable.products = response.data.products;
                     console.log(response.data[0].name);
 
                 } else if (response.login == false) {

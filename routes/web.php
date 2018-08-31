@@ -15,3 +15,4 @@ Route::get('/', 'PagesController@home');
 
 Route::get('/login', 'PagesController@login')->name('login');
 Route::get('/ingresar', 'PagesController@ingresar');
+Route::get('/registrarse', 'PagesController@registrarse');

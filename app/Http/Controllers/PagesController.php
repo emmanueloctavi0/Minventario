@@ -19,7 +19,12 @@ class PagesController extends Controller
 
     public function ingresar()
     {
-        return view('login');
+        return view('register.login');
+    }
+
+    public function registrarse()
+    {
+        return view('register.register');
     }
 
     public function home()

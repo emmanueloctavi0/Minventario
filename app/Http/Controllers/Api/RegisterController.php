@@ -31,8 +31,15 @@ class RegisterController extends BaseController
             'password' => bcrypt($request->password),
         ]);
         $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'], 201);
+
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        // if ($request->remember_me) {
+        //     $token->expires_at = Carbon::now()->addWeeks(1);
+        // }
+        $token->save();
+
+        return $this->sendResponse($tokenResult->accessToken, 'Usuario creado exitosamente');
     }
     public function login(Request $request)
     {
