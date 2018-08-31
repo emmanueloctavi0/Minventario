@@ -14,4 +14,6 @@ class Article extends Model
         'price',
         'user_id',
     ];
+
+    protected $primaryKey = 'article_id';
 }

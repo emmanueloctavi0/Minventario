@@ -106,8 +106,25 @@ class ArticleController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $user_id = $request->user()->id;
+
+
+        $article = Article::where([
+            [ 'article_id', '=', $id ],
+            ['user_id', '=', $user_id]
+        ])->first();
+
+
+        if (is_null($article)) {
+            return $this->sendError('Producto no encontrado');
+        }
+
+        // return $this->sendResponse($article, 'Producto eliminado correctamente');
+        Article::find($id)->delete();
+
+        return $this->sendResponse($id, 'Producto eliminado correctamente');
+
     }
 }

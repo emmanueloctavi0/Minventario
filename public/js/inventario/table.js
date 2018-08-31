@@ -3,12 +3,13 @@ var articleTable = new Vue({
     el: '#articleTable',
     data: {
         url: window.location.href,
-        urlApi: window.location.href+'api/article',
+        urlApi: window.location.href+'api/article/',
         success: false,
         areProducts: false,
         userName: "",
         products: null,
-        jwt : ""
+        jwt : "",
+        productId: null
     },
     mounted: function () {
         this.$nextTick(function () {
@@ -50,6 +51,24 @@ var articleTable = new Vue({
             })
             .catch(err => console.error(err));
         },
+        deleteProduct: function (productId) {
+            //Se manda la peticion para eliminar un producto
+
+            fetch(this.urlApi + productId,{
+                method: 'DELETE',
+                headers:{
+                    'Authorization' : 'Bearer '+ articleTable.jwt,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(response => {
+                //Eliminar tambien de articleTable.products
+                articleTable.getArticles();
+
+            })
+            .catch(err => console.error(err));
+        }
 
     }
 });

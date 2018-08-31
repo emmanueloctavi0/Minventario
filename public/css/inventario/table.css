@@ -1,0 +1,7 @@
+#productId {
+    cursor: pointer;;
+}
+
+#productId:hover{
+    text-decoration: underline;
+}
