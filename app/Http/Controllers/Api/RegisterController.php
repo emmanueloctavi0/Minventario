@@ -59,8 +59,8 @@ class RegisterController extends BaseController
             return $this->sendError('Las credenciales no son correctas2');
         }
         $user = $request->user();
-        return $this->sendResponse($user,'test');
         $tokenResult = $user->createToken('Personal Access Token');
+        return $this->sendResponse($user,'test');
         $token = $tokenResult->token;
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
