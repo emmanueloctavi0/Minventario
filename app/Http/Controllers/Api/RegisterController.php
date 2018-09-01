@@ -56,7 +56,7 @@ class RegisterController extends BaseController
         }
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)) {
-            return $this->sendError('Las credenciales no son correctas');
+            return $this->sendError('Las credenciales no son correctas2');
         }
         $user = $request->user();
         return $this->sendResponse($user,'test');
