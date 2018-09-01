@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{url('css/inventario/table.css')}}">
+    <link rel="stylesheet" href="{{secure_url('css/inventario/table.css')}}">
 @endsection
 
 @section('navbar-items')
@@ -60,8 +60,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script type="text/javascript" src="{{url('js/inventario/table.js')}}"></script>
+<script type="text/javascript" src="{{secure_url('js/inventario/table.js')}}"></script>
 {{--Graficas--}}
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="{{url('js/inventario/pieChart.js')}}" ></script>
+<script type="text/javascript" src="{{secure_url('js/inventario/pieChart.js')}}" ></script>
 @endsection

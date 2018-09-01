@@ -34,5 +34,5 @@
     <a  href="/ingresar" class="w-25 mx-auto d-inline-block btn btn-primary">Iniciar sesión</a>
 </div>
 </div>
-<script type="text/javascript" src="{{url('js/register/register.js')}}" ></script>
+<script type="text/javascript" src="{{secure_url('js/register/register.js')}}" ></script>
 @endsection

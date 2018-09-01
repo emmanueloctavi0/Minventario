@@ -27,5 +27,5 @@
 
         <button id="sendData" class="w-50 mx-auto btn btn-success" type="button" name="button">Agregar</button>
     </div>
-    <script type="text/javascript" src="{{url('js/inventario/addProduct.js')}}" ></script>
+    <script type="text/javascript" src="{{secure_url('js/inventario/addProduct.js')}}" ></script>
 @endsection

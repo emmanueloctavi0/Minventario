@@ -31,6 +31,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="{{url('js/register/login.js')}}"> </script>
+<script type="text/javascript" src="{{secure_url('js/register/login.js')}}"> </script>
 
 @endsection
