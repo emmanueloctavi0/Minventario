@@ -69,7 +69,22 @@ var articleTable = new Vue({
             })
             .catch(err => console.error(err));
         },
-        
+        downloadFile: async function () {
+            const response = await fetch('api/download', {
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer '+articleTable.jwt
+                }
+            });
+            const doc = await response.blob();
+            let url = window.URL.createObjectURL(doc);
+            let link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'misProductos.xlsx');
+            document.body.appendChild(link);
+            link.click();
+        }
+
 
     }
 });

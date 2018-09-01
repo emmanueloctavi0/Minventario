@@ -43,7 +43,7 @@
     </div>
     <div class="btnTable">
         <button v-if="areProducts" class="btn btn-success my-2 mx-3">Descargar PDF</button>
-        <button v-if="areProducts" class="btn btn-success my-2 mx-3">Descargar Excel</button>
+        <button v-if="areProducts" v-on:click="downloadFile" class="btn btn-success my-2 mx-3">Descargar Excel</button>
 
         <button class="btnExcel btn btn-danger my-2 mx-3">Subir Excel</button>
     </div>

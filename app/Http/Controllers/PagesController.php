@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Exports\ArticleExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Article;
 
 class PagesController extends Controller
 {
@@ -44,8 +45,9 @@ class PagesController extends Controller
         return view('inventario.updateProduct', ['articleId' => $articleId]);
     }
 
-    public function download()
+    public function download(Request $request)
     {
-        return Excel::download(new ArticleExport, 'articulos.xlsx');
+        $user_id = $request->user()->id;
+        return Excel::download(new ArticleExport($user_id), 'articulos.xlsx');
     }
 }
