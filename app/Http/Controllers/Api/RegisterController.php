@@ -59,6 +59,7 @@ class RegisterController extends BaseController
             return $this->sendError('Las credenciales no son correctas');
         }
         $user = $request->user();
+        return $this->sendResponse($user,'test');
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me) {
