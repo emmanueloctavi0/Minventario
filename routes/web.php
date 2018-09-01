@@ -16,3 +16,5 @@ Route::get('/', 'PagesController@home');
 Route::get('/login', 'PagesController@login')->name('login');
 Route::get('/ingresar', 'PagesController@ingresar');
 Route::get('/registrarse', 'PagesController@registrarse');
+Route::get('/agregarProducto', 'PagesController@agregarProducto');
+Route::get('/modificar/{articleId}', 'PagesController@modificar');

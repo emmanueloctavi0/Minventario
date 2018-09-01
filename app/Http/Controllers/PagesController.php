@@ -31,4 +31,14 @@ class PagesController extends Controller
     {
         return view('inventario.inventarioIndex');
     }
+
+    public function agregarProducto()
+    {
+        return view('inventario.addProduct');
+    }
+
+    public function modificar($articleId)
+    {
+        return view('inventario.updateProduct', ['articleId' => $articleId]);
+    }
 }

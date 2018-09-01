@@ -15,7 +15,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+                <ul class="container navbar-nav mr-auto">
                     @yield('navbar-items')
                 </ul>
             </div>

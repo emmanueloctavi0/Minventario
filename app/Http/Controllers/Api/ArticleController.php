@@ -51,12 +51,12 @@ class ArticleController extends BaseController
         $validator = Validator::make($input, [
             'name' => 'required',
             'description' => 'required',
-            'amount' => 'required',
-            'price' => 'required',
+            'amount' => 'required|numeric',
+            'price' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation error', $validator->errors());
+            return $this->sendError('Error de validacion', $validator->errors());
         }
 
         $input['user_id'] = $request->user()->id;
@@ -72,9 +72,19 @@ class ArticleController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $user_id = $request->user()->id;
+        $article = Article::where([
+            ['user_id','=', $user_id],
+            ['article_id', '=', $id]
+        ])->first();
+
+        if (is_null($article)) {
+            return $this->sendError('Article not found');
+        }
+
+        return $this->sendResponse($article, 'Datos traidos exitosamente');
     }
 
     /**
@@ -97,7 +107,39 @@ class ArticleController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'description' => 'required',
+            'amount' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Error de validacion', $validator->errors());
+        }
+
+        //Buscar el elemento a actualizar
+        $user_id = $request->user()->id;
+        $article = Article::where([
+            ['user_id','=', $user_id],
+            ['article_id', '=', $id]
+        ])->first();
+
+        //Si no se encuentra el elemento
+        if (is_null($article)) {
+            return $this->sendError('Article not found');
+        }
+
+        $article->name = $input['name'];
+        $article->description = $input['description'];
+        $article->amount = $input['amount'];
+        $article->price = $input['price'];
+
+        $article->save();
+
+        return $this->sendResponse($article,'El producto fue actualizado exitosamente');
     }
 
     /**

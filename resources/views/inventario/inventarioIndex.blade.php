@@ -13,7 +13,7 @@
 @section('content')
 <div id="articleTable">
     <h2 class="my-4 text-center">Inventario de @{{userName}}</h2>
-    <button type="button" class="btn btn-outline-secondary btn-sm mb-2">Agregar producto</button>
+    <a href="/agregarProducto" class="btn btn-outline-secondary btn-sm mb-2">Agregar producto</a>
     <table v-if="areProducts" class="table table-hover">
         <thead>
             <tr>
@@ -28,7 +28,7 @@
         </thead>
         <tbody v-for="product in products">
             <tr>
-                <th scope="row">@{{product.article_id}}</th>
+                <th scope="row"><a class="text-body" v-bind:href="'/modificar/'+product.article_id">@{{product.article_id}}</a> </th>
                 <td>@{{product.name}}</td>
                 <td>@{{product.description}}</td>
                 <td>@{{product.amount}}</td>
