@@ -60,7 +60,7 @@ class RegisterController extends BaseController
         }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
-        return $this->sendResponse($user,'test');
+
         $token = $tokenResult->token;
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);

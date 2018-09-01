@@ -31,7 +31,7 @@ btnLogin.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data.access_token + ";" + expires + ";path=/";
-            location.href = 'http://localhost:8000/';
+            location.href = url;
         } else {
             if (json.success == false) {
                 let data = json.data;

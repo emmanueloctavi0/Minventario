@@ -43,7 +43,7 @@ btnCreate.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data + ";" + expires + ";path=/";
-            location.href='http://localhost:8000/';
+            location.href= url;
         }
     })
     .catch(err => console.error(err))
