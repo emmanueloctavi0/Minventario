@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Exports\ArticleExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PagesController extends Controller
 {
@@ -40,5 +42,10 @@ class PagesController extends Controller
     public function modificar($articleId)
     {
         return view('inventario.updateProduct', ['articleId' => $articleId]);
+    }
+
+    public function download()
+    {
+        return Excel::download(new ArticleExport, 'articulos.xlsx');
     }
 }

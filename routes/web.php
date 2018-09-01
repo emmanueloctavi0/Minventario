@@ -18,3 +18,4 @@ Route::get('/ingresar', 'PagesController@ingresar');
 Route::get('/registrarse', 'PagesController@registrarse');
 Route::get('/agregarProducto', 'PagesController@agregarProducto');
 Route::get('/modificar/{articleId}', 'PagesController@modificar');
+Route::get('/download', 'PagesController@download');

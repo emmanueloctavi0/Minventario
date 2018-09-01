@@ -6,7 +6,7 @@
 
 @section('content')
     <h3 class="text-center my-2">Modificar producto</h3>
-    <div class="card p-4 mt-3 mx-auto w-50">
+    <div class="card p-4 my-4 mx-auto w-50">
         <fieldset disabled>
             <div class="form-group">
                 <label for="articleId">ID</label>
