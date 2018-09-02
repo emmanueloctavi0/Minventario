@@ -2,8 +2,8 @@
 var articleTable = new Vue({
     el: '#articleTable',
     data: {
-        url: window.location.href,
-        urlApi: window.location.href+'api/article/',
+        url: 'https://minventario-test.herokuapp.com/',
+        urlApi: 'https://minventario-test.herokuapp.com/api/article/',
         success: false,
         areProducts: false,
         userName: "",
@@ -26,7 +26,7 @@ var articleTable = new Vue({
     methods: {
         getArticles: function () {
 
-            fetch(articleTable.urlApi, {
+            fetch(this.urlApi, {
                 method: 'GET',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
@@ -70,7 +70,7 @@ var articleTable = new Vue({
             .catch(err => console.error(err));
         },
         downloadFile: async function () {
-            const response = await fetch('api/download', {
+            const response = await fetch(this.url+'api/download', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer '+articleTable.jwt
@@ -91,7 +91,7 @@ var articleTable = new Vue({
 
 const logout = document.getElementById('logout');
 logout.onclick = function () {
-    fetch(window.location.origin + '/api/auth/logout',{
+    fetch(this.url+ '/api/auth/logout',{
         method: 'GET',
         headers:{
             'Authorization' : 'Bearer '+ articleTable.jwt,
