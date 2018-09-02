@@ -17,7 +17,7 @@ var articleTable = new Vue({
             this.jwt = getCookie('jwt');
             //Redirecciona a ingresar si no existe el token
             if (this.jwt == "") {
-                location.href = this.url+'ingresar';
+                location.href = 'https://minventario-test.herokuapp.com/ingresar';
             }
 
             this.getArticles();
@@ -45,7 +45,7 @@ var articleTable = new Vue({
                     articleTable.userName = response.data.user_name;
 
                 } else if (response.login == false) {
-                    location.href = this.url+'ingresar';
+                    location.href = 'https://minventario-test.herokuapp.com/ingresar';
                 }
 
             })
@@ -91,7 +91,7 @@ var articleTable = new Vue({
 
 const logout = document.getElementById('logout');
 logout.onclick = function () {
-    fetch('https://minventario-test.herokuapp.com/api/api/auth/logout',{
+    fetch('https://minventario-test.herokuapp.com/api/auth/logout',{
         method: 'GET',
         headers:{
             'Authorization' : 'Bearer '+ articleTable.jwt,
