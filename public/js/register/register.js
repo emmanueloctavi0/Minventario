@@ -17,7 +17,7 @@ btnCreate.onclick = function () {
         password_confirmation : passwordRegisterC.value
     }
     //console.log(data);
-    fetch(url, {
+    fetch('https://minventario-test.herokuapp.com/api/auth/signup', {
         method: 'POST',
         body: JSON.stringify(data),
         headers:{
@@ -43,7 +43,7 @@ btnCreate.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data + ";" + expires + ";path=/";
-            location.href= url;
+            location.href= 'https://minventario-test.herokuapp.com/';
         }
     })
     .catch(err => console.error(err))
