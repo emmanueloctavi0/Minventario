@@ -26,7 +26,7 @@ var articleTable = new Vue({
     methods: {
         getArticles: function () {
 
-            fetch(this.urlApi, {
+            fetch('https://minventario-test.herokuapp.com/api/article', {
                 method: 'GET',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
@@ -54,7 +54,7 @@ var articleTable = new Vue({
         deleteProduct: function (productId) {
             //Se manda la peticion para eliminar un producto
 
-            fetch(this.urlApi + productId,{
+            fetch('https://minventario-test.herokuapp.com/api/article' + productId,{
                 method: 'DELETE',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
@@ -70,7 +70,7 @@ var articleTable = new Vue({
             .catch(err => console.error(err));
         },
         downloadFile: async function () {
-            const response = await fetch(this.url+'api/download', {
+            const response = await fetch('https://minventario-test.herokuapp.com/api/download', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer '+articleTable.jwt
@@ -91,7 +91,7 @@ var articleTable = new Vue({
 
 const logout = document.getElementById('logout');
 logout.onclick = function () {
-    fetch(this.url+ '/api/auth/logout',{
+    fetch('https://minventario-test.herokuapp.com/api/api/auth/logout',{
         method: 'GET',
         headers:{
             'Authorization' : 'Bearer '+ articleTable.jwt,

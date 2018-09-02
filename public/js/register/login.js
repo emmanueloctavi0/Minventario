@@ -15,7 +15,7 @@ btnLogin.onclick = function () {
         remember_me : rememberMe.checked,
     }
     //console.log(data);
-    fetch(url, {
+    fetch('https://minventario-test.herokuapp.com/api/auth/login', {
         method: 'POST',
         body: JSON.stringify(data),
         headers:{
@@ -31,7 +31,7 @@ btnLogin.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data.access_token + ";" + expires + ";path=/";
-            location.href = url;
+            location.href = 'https://minventario-test.herokuapp.com';
         } else {
             if (json.success == false) {
                 let data = json.data;
