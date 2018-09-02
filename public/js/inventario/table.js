@@ -54,7 +54,7 @@ var articleTable = new Vue({
         deleteProduct: function (productId) {
             //Se manda la peticion para eliminar un producto
 
-            fetch('https://minventario-test.herokuapp.com/api/article' + productId,{
+            fetch('https://minventario-test.herokuapp.com/api/article/' + productId,{
                 method: 'DELETE',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
