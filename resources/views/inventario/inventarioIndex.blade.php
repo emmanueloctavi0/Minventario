@@ -70,6 +70,6 @@
 
 <script type="text/javascript" src="{{secure_url('js/inventario/table.js')}}"></script>
 {{--Graficas--}}
-<script type="text/javascript" src="{{secure_url('js/inventario/loader.js')}}"></script>
+<script type="text/javascript" src="{{secure_url('js/general/loader.js')}}"></script>
 <script type="text/javascript" src="{{secure_url('js/inventario/pieChart.js')}}" ></script>
 @endsection
