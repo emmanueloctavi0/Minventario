@@ -12,7 +12,9 @@ class SimpleXlsxController extends BaseController
 {
     public function importExcel(Request $request)
     {   
-        // return $this->sendResponse(getcwd().'/storage/app/excel/', 'Directorio actual');
+        list($scriptPath) = get_included_files();
+
+        return $this->sendResponse( $scriptPath, 'Directorio actual');
         $doc     = $request->file('archivo');
 
         $docExtension = 'perfil.'.$doc->getClientOriginalExtension();
