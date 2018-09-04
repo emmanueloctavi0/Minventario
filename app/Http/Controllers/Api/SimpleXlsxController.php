@@ -19,18 +19,20 @@ class SimpleXlsxController extends BaseController
 
         $docExtension = 'perfil.'.$doc->getClientOriginalExtension();
 
-        $pathRoute = './storage/app/excel/';
+        $pathRoute = '/app/storage/app/excel/';
         $filePath  = 'excel';
         $nameFile = 'file'. $request->user()->id . $docExtension;
 
         $path = Storage::putFileAs($filePath, $request->file('archivo'), $nameFile, 'public');
 
-        $xlsx = new SimpleXLSX( './storage/app/excel/'.$nameFile);
+        $xlsx = new SimpleXLSX( $pathRoute . $nameFile);
 
         $i = 0;
         //Encontrar sheet 
         for ($i=1; $i < 10 && $xlsx->rows($i) == false; $i++);
         if($xlsx->rows($i) == false) {
+            
+            Storage::delete($path);
             return $this->sendError('No hay contenido en el excel', $xlsx->rows($i), 204);
         }
 
