@@ -49,7 +49,9 @@ var articleTable = new Vue({
                 }
 
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                location.href = 'https://minventario-test.herokuapp.com/ingresar';                
+            });
         },
         deleteProduct: function (productId) {
             //Se manda la peticion para eliminar un producto
