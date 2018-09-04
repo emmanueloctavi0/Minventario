@@ -12,18 +12,18 @@ class SimpleXlsxController extends BaseController
 {
     public function importExcel(Request $request)
     {   
-        return $this->sendResponse(getcwd(), 'Directorio actual');
+        // return $this->sendResponse(getcwd().'/storage/app/excel/', 'Directorio actual');
         $doc     = $request->file('archivo');
 
         $docExtension = 'perfil.'.$doc->getClientOriginalExtension();
 
-        
+        $pathRoute = './storage/app/excel/';
         $filePath  = 'excel';
         $nameFile = 'file'. $request->user()->id . $docExtension;
 
         $path = Storage::putFileAs($filePath, $request->file('archivo'), $nameFile, 'public');
 
-        $xlsx = new SimpleXLSX( '/home/octavio/Documents/PHP/Inventario/storage/app/excel/'.$nameFile);
+        $xlsx = new SimpleXLSX( './storage/app/excel/'.$nameFile);
 
         $i = 0;
         //Encontrar sheet 
