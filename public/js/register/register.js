@@ -1,5 +1,5 @@
 //Constantes input
-
+const URL = window.location.origin;
 const nameRegister = document.getElementById('nameRegister');
 const emailRegister = document.getElementById('emailRegister');
 const passwordRegister = document.getElementById('passwordRegister');
@@ -9,7 +9,6 @@ const registerHelp = document.getElementById('registerHelp');
 
 //Al dar click se tienen que validar los datos y crear la cuenta
 btnCreate.onclick = function () {
-    let url = window.location.origin+'/api/auth/signup';
     let data = {
         name : nameRegister.value,
         email : emailRegister.value,
@@ -17,7 +16,7 @@ btnCreate.onclick = function () {
         password_confirmation : passwordRegisterC.value
     }
     //console.log(data);
-    fetch('https://minventario-test.herokuapp.com/api/auth/signup', {
+    fetch(URL +'/api/auth/signup', {
         method: 'POST',
         body: JSON.stringify(data),
         headers:{
@@ -43,7 +42,7 @@ btnCreate.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data + ";" + expires + ";path=/";
-            location.href= 'https://minventario-test.herokuapp.com/';
+            location.href= URL;
         }
     })
     .catch(err => console.error(err))

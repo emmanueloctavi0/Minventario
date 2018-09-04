@@ -1,9 +1,8 @@
 
+const URL = window.location.origin;
 var articleTable = new Vue({
     el: '#articleTable',
     data: {
-        url: 'https://minventario-test.herokuapp.com/',
-        urlApi: 'https://minventario-test.herokuapp.com/api/article/',
         success: false,
         areProducts: false,
         userName: "",
@@ -17,7 +16,7 @@ var articleTable = new Vue({
             this.jwt = getCookie('jwt');
             //Redirecciona a ingresar si no existe el token
             if (this.jwt == "") {
-                location.href = 'https://minventario-test.herokuapp.com/ingresar';
+                location.href = URL+'/ingresar';
             }
 
             this.getArticles();
@@ -26,7 +25,7 @@ var articleTable = new Vue({
     methods: {
         getArticles: function () {
 
-            fetch('https://minventario-test.herokuapp.com/api/article', {
+            fetch(URL+'/api/article', {
                 method: 'GET',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
@@ -45,18 +44,18 @@ var articleTable = new Vue({
                     articleTable.userName = response.data.user_name;
 
                 } else if (response.login == false) {
-                    location.href = 'https://minventario-test.herokuapp.com/ingresar';
+                    location.href = URL+'/ingresar';
                 }
 
             })
             .catch(err => {
-                location.href = 'https://minventario-test.herokuapp.com/ingresar';                
+                location.href = URL+'/ingresar';                
             });
         },
         deleteProduct: function (productId) {
             //Se manda la peticion para eliminar un producto
 
-            fetch('https://minventario-test.herokuapp.com/api/article/' + productId,{
+            fetch(URL+'/api/article/' + productId,{
                 method: 'DELETE',
                 headers:{
                     'Authorization' : 'Bearer '+ articleTable.jwt,
@@ -72,7 +71,7 @@ var articleTable = new Vue({
             .catch(err => console.error(err));
         },
         downloadFile: async function () {
-            const response = await fetch('https://minventario-test.herokuapp.com/api/download', {
+            const response = await fetch(URL+'/api/download', {
                 method: 'GET',
                 headers: {
                     Authorization: 'Bearer '+articleTable.jwt
@@ -85,15 +84,60 @@ var articleTable = new Vue({
             link.setAttribute('download', 'misProductos.xlsx');
             document.body.appendChild(link);
             link.click();
+        },
+        uploadFile: function() {
+            const inputExcel = document.querySelector('.inputExcel.my-2');
+
+            if(inputExcel.files[0] != undefined) {
+                //Si hay un archivo envía el archivo
+                let formData = new FormData();
+                formData.append('archivo', inputExcel.files[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: URL+'/api/importExcel',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    headers: { Authorization: 'Bearer '+ articleTable.jwt },
+                    data: formData,
+                    success: function(resp){
+                        // resp = JSON.parse( resp );
+                        if(resp.success == true) {
+                            articleTable.getArticles();
+                            inputExcel.value = '';
+                        }
+                    }
+                });
+            }
+
+        },
+        exportPDF: function () {
+            var columns = ["ID", "Nombre", "Descripción", "Cantidad", "Precio unitario", "Precio total"];
+
+            var rows = [];
+            articleTable.products.forEach(element => {
+                rows.push([
+                    element.article_id,
+                    element.name,
+                    element.description,
+                    element.amount,
+                    '$'+element.price,
+                    '$'+element.price * element.amount
+                ]);
+            });
+            
+            var doc = new jsPDF('p', 'pt');
+            doc.autoTable(columns, rows);
+            doc.save('misProductos.pdf');
+                        
         }
-
-
     }
 });
 
 const logout = document.getElementById('logout');
 logout.onclick = function () {
-    fetch('https://minventario-test.herokuapp.com/api/auth/logout',{
+    fetch(URL+'/api/auth/logout',{
         method: 'GET',
         headers:{
             'Authorization' : 'Bearer '+ articleTable.jwt,

@@ -1,5 +1,5 @@
-//Buscamos la cookie para saber si el usuario está logeado
 const URL = window.location.origin;
+//Buscamos la cookie para saber si el usuario está logeado
 let name = 'jwt' + "=";
 let ca = document.cookie.split(';');
 for(var i = 0; i < ca.length; i++) {

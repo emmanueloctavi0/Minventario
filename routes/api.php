@@ -26,6 +26,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::middleware('auth:api')->group( function () {
 	Route::resource('article', 'Api\ArticleController');
     Route::get('/download', 'PagesController@download');
+    Route::post('/importExcel', 'Api\SimpleXlsxController@importExcel');
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

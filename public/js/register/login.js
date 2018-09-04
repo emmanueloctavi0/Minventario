@@ -1,3 +1,4 @@
+const URL = window.location.origin;
 //Constantes para iniciar sesion
 const emailLogin = document.getElementById('emailLogin');
 const passwordLogin = document.getElementById('passwordLogin');
@@ -8,14 +9,13 @@ const loginHelp = document.getElementById('loginHelp');
 //Iniciar sesion al dar click al boton
 btnLogin.onclick = function () {
 
-    let url = window.location.origin+'/api/auth/login';
     let data = {
         email : emailLogin.value,
         password : passwordLogin.value,
         remember_me : rememberMe.checked,
     }
     //console.log(data);
-    fetch('https://minventario-test.herokuapp.com/api/auth/login', {
+    fetch(URL+'/api/auth/login', {
         method: 'POST',
         body: JSON.stringify(data),
         headers:{
@@ -31,7 +31,7 @@ btnLogin.onclick = function () {
             d.setTime(d.getTime() + (30*24*60*60*1000));
             let expires = "expires="+ d.toUTCString();
             document.cookie = 'jwt=' + json.data.access_token + ";" + expires + ";path=/";
-            location.href = 'https://minventario-test.herokuapp.com';
+            location.href = URL;
         } else {
             if (json.success == false) {
                 let data = json.data;
